@@ -15,3 +15,4 @@ go install && go-gin-mgo
  3. Move route method to handlers*
 
 
+to generate doc , see https://github.com/rookiejin/swagger
