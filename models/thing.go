@@ -11,14 +11,19 @@ const (
 // @def Thing
 type Thing struct {
 	Id    bson.ObjectId `json:"_id,omitempty" bson:"_id,omitempty"`
-	Name  string
-	Value string
+	Name  string `binding:"required"`
+	Value string `binding:"required"`
+}
+
+// @def Things
+type Thines struct {
+	Data []Thing         `json:"data" `
 }
 
 // @def Pets
 type Pets struct {
 	Id  bson.ObjectId `json:"id"`
-	Tag []Tag         `json:"tag" swag:"Tag"`
+	Tag []Tag         `json:"tag" `
 }
 
 // @def Tag

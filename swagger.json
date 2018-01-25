@@ -70,7 +70,7 @@
 "description": "petslist",
 "schema": {
 "type": "object",
-"$ref": "#/definitions/Pets"
+"$ref": "#/definitions/Things"
 }
 }
 }
@@ -107,13 +107,6 @@
 "type": "object",
 "$ref": "#/definitions/Thing"
 }
-},
-"422": {
-"description": "error info",
-"schema": {
-"type": "object",
-"$ref": "#/definitions/Error"
-}
 }
 }
 },
@@ -148,13 +141,6 @@
 "schema": {
 "type": "object",
 "$ref": "#/definitions/Thing"
-}
-},
-"422": {
-"description": "error info",
-"schema": {
-"type": "object",
-"$ref": "#/definitions/Error"
 }
 }
 }
@@ -211,10 +197,7 @@
 "type": "string"
 },
 "tag": {
-"type": "array",
-"items": {
-"$ref": "#/definitions/Tag"
-}
+"type": "array"
 }
 }
 },
@@ -240,6 +223,14 @@
 },
 "value": {
 "type": "string"
+}
+}
+},
+"Things": {
+"type": "object",
+"properties": {
+"data": {
+"type": "array"
 }
 }
 }

@@ -17,7 +17,7 @@ import (
 // @Produce  json
 // @tag users
 // @Param   page query string false  "page of the gets"
-// @Success 200 {object} @Pets  "petslist"
+// @Success 200 {object} @Things  "petslist"
 // @Router /things [get]
 func List(c *gin.Context) {
 	db := c.MustGet("db").(*mgo.Database)
@@ -42,7 +42,6 @@ func List(c *gin.Context) {
 // @tag users
 // @Param   pets body @Thing true "pets fields"
 // @Success 200 {object} @Thing  "success"
-// @Failure 422 {object} @Error  "error info"
 // @Router /things [post]
 func Create(c *gin.Context) {
 	db := c.MustGet("db").(*mgo.Database)
@@ -116,7 +115,6 @@ func Delete(c *gin.Context) {
 // @tag users
 // @Param   pets body @Thing true "pets fields"
 // @Success 200 {object} @Thing  "success"
-// @Failure 422 {object} @Error  "error info"
 // @Router /things [put]
 func Update(c *gin.Context) {
 	db := c.MustGet("db").(*mgo.Database)
