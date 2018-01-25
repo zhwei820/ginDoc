@@ -10,9 +10,81 @@
 "license": {}
 },
 "paths": {
+"/article": {
+"get": {
+"description": "文章列表",
+"consumes": [
+"application/json"
+],
+"produces": [
+"application/json"
+],
+"tags": [
+"article"
+],
+"summary": "文章列表",
+"parameters": [
+{
+"type": "string",
+"description": "page",
+"name": "page",
+"in": "query"
+},
+{
+"type": "string",
+"description": "limit",
+"name": "limit",
+"in": "query"
+}
+],
+"responses": {
+"200": {
+"description": "文章列表",
+"schema": {
+"type": "object",
+"$ref": "#/definitions/Articles"
+}
+}
+}
+},
+"post": {
+"description": "Post",
+"consumes": [
+"application/json"
+],
+"produces": [
+"application/json"
+],
+"tags": [
+"article"
+],
+"summary": "Post",
+"parameters": [
+{
+"description": "pets fields",
+"name": "pets",
+"in": "body",
+"required": true,
+"schema": {
+"type": "object",
+"$ref": "#definitions/Article"
+}
+}
+],
+"responses": {
+"200": {
+"description": "success",
+"schema": {
+"type": "object",
+"$ref": "#/definitions/Article"
+}
+}
+}
+}
+},
 "/thing": {
 "get": {
-"description": "getOne",
+"description": "单个",
 "consumes": [
 "application/json"
 ],
@@ -22,8 +94,7 @@
 "tags": [
 "users"
 ],
-"summary": "getOne",
-"operationId": "getOne",
+"summary": "单个",
 "parameters": [
 {
 "type": "string",
@@ -45,9 +116,9 @@
 },
 "/things": {
 "get": {
-"description": "获取pets",
+"description": "列表",
 "consumes": [
-"application/json"
+"text/html"
 ],
 "produces": [
 "application/json"
@@ -55,12 +126,11 @@
 "tags": [
 "users"
 ],
-"summary": "getPets",
-"operationId": "file.upload",
+"summary": "列表",
 "parameters": [
 {
 "type": "string",
-"description": "page of the gets",
+"description": "page",
 "name": "page",
 "in": "query"
 }
@@ -76,7 +146,7 @@
 }
 },
 "put": {
-"description": "创建thing",
+"description": "Put",
 "consumes": [
 "application/json"
 ],
@@ -86,8 +156,7 @@
 "tags": [
 "users"
 ],
-"summary": "getPets",
-"operationId": "create_thing",
+"summary": "Put",
 "parameters": [
 {
 "description": "pets fields",
@@ -111,7 +180,7 @@
 }
 },
 "post": {
-"description": "创建thing",
+"description": "新增",
 "consumes": [
 "application/json"
 ],
@@ -121,8 +190,7 @@
 "tags": [
 "users"
 ],
-"summary": "getPets",
-"operationId": "create_thing",
+"summary": "新增",
 "parameters": [
 {
 "description": "pets fields",
@@ -157,7 +225,6 @@
 "users"
 ],
 "summary": "Delete",
-"operationId": "Delete",
 "parameters": [
 {
 "type": "string",
@@ -179,6 +246,34 @@
 }
 },
 "definitions": {
+"Article": {
+"type": "object",
+"properties": {
+"content": {
+"type": "string"
+},
+"created_at": {
+"type": "number"
+},
+"id": {
+"type": "number"
+},
+"title": {
+"type": "string"
+},
+"updated_at": {
+"type": "number"
+}
+}
+},
+"Articles": {
+"type": "object",
+"properties": {
+"data": {
+"type": "array"
+}
+}
+},
 "Error": {
 "type": "object",
 "properties": {
