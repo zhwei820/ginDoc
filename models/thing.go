@@ -6,6 +6,8 @@ import (
 
 const (
 	CollectionStuff = "stuff"
+	CollectionArticle = "article"
+
 )
 
 // @def Thing

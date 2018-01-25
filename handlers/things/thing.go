@@ -5,8 +5,9 @@ import (
 
 	"gopkg.in/mgo.v2"
 	"gopkg.in/mgo.v2/bson"
-	"github.com/chrisjstevenson/go-gin-mgo/models"
+	"ginDoc/models"
 	"github.com/gin-gonic/gin"
+	"fmt"
 )
 
 
@@ -25,7 +26,8 @@ func List(c *gin.Context) {
 
 	err := db.C(models.CollectionStuff).Find(nil).All(&things)
 	if err != nil {
-		c.Error(err)
+		c.JSON(http.StatusOK, gin.H{"msg":fmt.Sprintf("%s", err)})
+		return
 	}
 
 	// gin.H is a shortcut for map[string]interface{}
@@ -47,7 +49,7 @@ func Create(c *gin.Context) {
 	db := c.MustGet("db").(*mgo.Database)
 
 	thing := models.Thing{}
-	err := c.BindJSON(&thing)
+	err := c.ShouldBindJSON(&thing)
 	if err != nil {
 		c.Error(err)
 		return

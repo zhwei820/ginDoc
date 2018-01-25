@@ -1,8 +1,8 @@
 package main
 
 import (
-	"github.com/chrisjstevenson/go-gin-mgo/db"
-	"github.com/chrisjstevenson/go-gin-mgo/conf"
+	"ginDoc/db"
+	"ginDoc/conf"
 )
 
 

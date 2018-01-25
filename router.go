@@ -2,9 +2,9 @@ package main
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/chrisjstevenson/go-gin-mgo/middlewares"
-	"github.com/chrisjstevenson/go-gin-mgo/handlers/things"
-	"github.com/chrisjstevenson/go-gin-mgo/conf"
+	"ginDoc/middlewares"
+	"ginDoc/handlers/things"
+	"ginDoc/conf"
 )
 
 
