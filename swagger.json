@@ -1,0 +1,247 @@
+{
+"swagger": "2.0",
+"info": {
+"description": "go-gin swagger 文档测试.",
+"title": "还只是个测试",
+"contact": {
+"name": "zw",
+"email": "wei.zhou@shunwang.com"
+},
+"license": {}
+},
+"paths": {
+"/thing": {
+"get": {
+"description": "getOne",
+"consumes": [
+"application/json"
+],
+"produces": [
+"application/json"
+],
+"tags": [
+"users"
+],
+"summary": "getOne",
+"operationId": "getOne",
+"parameters": [
+{
+"type": "string",
+"description": "_id of doc",
+"name": "_id",
+"in": "query"
+}
+],
+"responses": {
+"200": {
+"description": "doc",
+"schema": {
+"type": "object",
+"$ref": "#/definitions/Pets"
+}
+}
+}
+}
+},
+"/things": {
+"get": {
+"description": "获取pets",
+"consumes": [
+"application/json"
+],
+"produces": [
+"application/json"
+],
+"tags": [
+"users"
+],
+"summary": "getPets",
+"operationId": "file.upload",
+"parameters": [
+{
+"type": "string",
+"description": "page of the gets",
+"name": "page",
+"in": "query"
+}
+],
+"responses": {
+"200": {
+"description": "petslist",
+"schema": {
+"type": "object",
+"$ref": "#/definitions/Pets"
+}
+}
+}
+},
+"put": {
+"description": "创建thing",
+"consumes": [
+"application/json"
+],
+"produces": [
+"application/json"
+],
+"tags": [
+"users"
+],
+"summary": "getPets",
+"operationId": "create_thing",
+"parameters": [
+{
+"description": "pets fields",
+"name": "pets",
+"in": "body",
+"required": true,
+"schema": {
+"type": "object",
+"$ref": "#definitions/Thing"
+}
+}
+],
+"responses": {
+"200": {
+"description": "success",
+"schema": {
+"type": "object",
+"$ref": "#/definitions/Thing"
+}
+},
+"422": {
+"description": "error info",
+"schema": {
+"type": "object",
+"$ref": "#/definitions/Error"
+}
+}
+}
+},
+"post": {
+"description": "创建thing",
+"consumes": [
+"application/json"
+],
+"produces": [
+"application/json"
+],
+"tags": [
+"users"
+],
+"summary": "getPets",
+"operationId": "create_thing",
+"parameters": [
+{
+"description": "pets fields",
+"name": "pets",
+"in": "body",
+"required": true,
+"schema": {
+"type": "object",
+"$ref": "#definitions/Thing"
+}
+}
+],
+"responses": {
+"200": {
+"description": "success",
+"schema": {
+"type": "object",
+"$ref": "#/definitions/Thing"
+}
+},
+"422": {
+"description": "error info",
+"schema": {
+"type": "object",
+"$ref": "#/definitions/Error"
+}
+}
+}
+},
+"delete": {
+"description": "Delete",
+"consumes": [
+"text/html"
+],
+"produces": [
+"application/json"
+],
+"tags": [
+"users"
+],
+"summary": "Delete",
+"operationId": "Delete",
+"parameters": [
+{
+"type": "string",
+"description": "_id of doc",
+"name": "_id",
+"in": "query"
+}
+],
+"responses": {
+"200": {
+"description": "doc",
+"schema": {
+"type": "object",
+"$ref": "#/definitions/Pets"
+}
+}
+}
+}
+}
+},
+"definitions": {
+"Error": {
+"type": "object",
+"properties": {
+"code": {
+"type": "int"
+},
+"message": {
+"type": "string"
+}
+}
+},
+"Pets": {
+"type": "object",
+"properties": {
+"id": {
+"type": "string"
+},
+"tag": {
+"type": "array",
+"items": {
+"$ref": "#/definitions/Tag"
+}
+}
+}
+},
+"Tag": {
+"type": "object",
+"properties": {
+"id": {
+"type": "string"
+},
+"name": {
+"type": "string"
+}
+}
+},
+"Thing": {
+"type": "object",
+"properties": {
+"id": {
+"type": "string"
+},
+"name": {
+"type": "string"
+},
+"value": {
+"type": "string"
+}
+}
+}
+}
+}

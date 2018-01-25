@@ -9,6 +9,16 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+
+// @Summary getPets
+// @Description 获取pets
+// @ID file.upload
+// @Accept  json
+// @Produce  json
+// @tag users
+// @Param   page query string false  "page of the gets"
+// @Success 200 {object} @Pets  "petslist"
+// @Router /things [get]
 func List(c *gin.Context) {
 	db := c.MustGet("db").(*mgo.Database)
 	things := []models.Thing{}
@@ -23,6 +33,17 @@ func List(c *gin.Context) {
 	c.JSON(http.StatusOK, things)
 }
 
+
+// @Summary getPets
+// @Description 创建thing
+// @ID create_thing
+// @Accept  json
+// @Produce  json
+// @tag users
+// @Param   pets body @Thing true "pets fields"
+// @Success 200 {object} @Thing  "success"
+// @Failure 422 {object} @Error  "error info"
+// @Router /things [post]
 func Create(c *gin.Context) {
 	db := c.MustGet("db").(*mgo.Database)
 
@@ -41,6 +62,16 @@ func Create(c *gin.Context) {
 	c.JSON(http.StatusCreated, thing)
 }
 
+
+// @Summary getOne
+// @Description getOne
+// @ID getOne
+// @Accept  json
+// @Produce  json
+// @tag users
+// @Param   _id query string false  "_id of doc"
+// @Success 200 {object} @Pets  "doc"
+// @Router /thing [get]
 func GetOne(c *gin.Context) {
 	db := c.MustGet("db").(*mgo.Database)
 
@@ -54,6 +85,15 @@ func GetOne(c *gin.Context) {
 	c.JSON(http.StatusOK, thing)
 }
 
+// @Summary Delete
+// @Description Delete
+// @ID Delete
+// @Accept  html
+// @Produce  json
+// @tag users
+// @Param   _id query string false  "_id of doc"
+// @Success 200 {object} @Pets  "doc"
+// @Router /things [delete]
 func Delete(c *gin.Context) {
 	db := c.MustGet("db").(*mgo.Database)
 
@@ -68,6 +108,16 @@ func Delete(c *gin.Context) {
 	c.Data(204, "application/json", make([]byte, 0))
 }
 
+// @Summary getPets
+// @Description 创建thing
+// @ID create_thing
+// @Accept  json
+// @Produce  json
+// @tag users
+// @Param   pets body @Thing true "pets fields"
+// @Success 200 {object} @Thing  "success"
+// @Failure 422 {object} @Error  "error info"
+// @Router /things [put]
 func Update(c *gin.Context) {
 	db := c.MustGet("db").(*mgo.Database)
 

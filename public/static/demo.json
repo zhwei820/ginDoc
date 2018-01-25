@@ -1,0 +1,72 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "",
+    "version": "",
+    "title": "",
+    "termsOfService": "",
+    "contact": {
+      "email": "wq.wang@shunwang.com"
+    }
+  },
+  "host": "127.0.0.1:8000",
+  "basePath": "/",
+  "tags": [
+    {
+      "name": "DemoService",
+      "description": "一个服务实例说明"
+    }
+  ],
+  "paths": {
+    "/test": {
+      "post": {
+        "tags": [
+          "DemoService"
+        ],
+        "summary": "普通函数，无注释参数类型，默认为str",
+        "description": "普通函数，无注释参数类型，默认为str\n        :param username: 用户名称\n        :return:",
+        "operationId": "DemoService_demo1",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "username": {
+                  "type": "string",
+                  "format": "string",
+                  "description": "用户名称"
+                }
+              },
+              "additionalProperties": false,
+              "title": "普通函数，无注释参数类型，默认为str",
+              "required": [
+                "username"
+              ]
+            }
+          },
+          {
+            "in": "query",
+            "name": "cdg",
+            "required": true,
+            "description": "jogjogjo",
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ok"
+          }
+        }
+      }
+    }
+  }
+}

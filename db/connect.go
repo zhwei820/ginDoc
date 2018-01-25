@@ -1,11 +1,10 @@
 package db
 
-
 import (
 	"fmt"
-	"os"
 
 	"gopkg.in/mgo.v2"
+	"github.com/chrisjstevenson/go-gin-mgo/conf"
 )
 
 var (
@@ -14,18 +13,9 @@ var (
 	Mongo *mgo.DialInfo
 )
 
-const(
-	MongoDBUrl = "mongodb://localhost:27017/things-and-stuff"
-)
-
 
 func Connect() {
-	uri := os.Getenv("MONGODB_URL")
-
-	if len(uri) == 0 {
-		uri = MongoDBUrl
-	}
-
+	var uri = conf.Config()["mongourl"]
 	mongo, err := mgo.ParseURL(uri)
 	s, err := mgo.Dial(uri)
 	if err != nil {
