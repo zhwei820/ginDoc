@@ -61,8 +61,8 @@
 "summary": "Post",
 "parameters": [
 {
-"description": "pets fields",
-"name": "pets",
+"description": "article",
+"name": "article",
 "in": "body",
 "required": true,
 "schema": {
@@ -108,39 +108,7 @@
 "description": "doc",
 "schema": {
 "type": "object",
-"$ref": "#/definitions/Pets"
-}
-}
-}
-}
-},
-"/things": {
-"get": {
-"description": "列表",
-"consumes": [
-"text/html"
-],
-"produces": [
-"application/json"
-],
-"tags": [
-"users"
-],
-"summary": "列表",
-"parameters": [
-{
-"type": "string",
-"description": "page",
-"name": "page",
-"in": "query"
-}
-],
-"responses": {
-"200": {
-"description": "petslist",
-"schema": {
-"type": "object",
-"$ref": "#/definitions/Things"
+"$ref": "#/definitions/Thing"
 }
 }
 }
@@ -159,14 +127,21 @@
 "summary": "Put",
 "parameters": [
 {
-"description": "pets fields",
-"name": "pets",
+"description": "thing fields",
+"name": "thing",
 "in": "body",
 "required": true,
 "schema": {
 "type": "object",
 "$ref": "#definitions/Thing"
 }
+},
+{
+"type": "string",
+"description": "mongo id",
+"name": "_id",
+"in": "query",
+"required": true
 }
 ],
 "responses": {
@@ -193,8 +168,8 @@
 "summary": "新增",
 "parameters": [
 {
-"description": "pets fields",
-"name": "pets",
+"description": "thing",
+"name": "thing",
 "in": "body",
 "required": true,
 "schema": {
@@ -238,7 +213,7 @@
 "description": "doc",
 "schema": {
 "type": "object",
-"$ref": "#/definitions/Pets"
+"$ref": "#/definitions/Thing"
 }
 }
 }
@@ -270,7 +245,10 @@
 "type": "object",
 "properties": {
 "data": {
-"type": "array"
+"type": "array",
+"items": {
+"$ref": "#/definitions/Article"
+}
 }
 }
 },
@@ -282,17 +260,6 @@
 },
 "message": {
 "type": "string"
-}
-}
-},
-"Pets": {
-"type": "object",
-"properties": {
-"id": {
-"type": "string"
-},
-"tag": {
-"type": "array"
 }
 }
 },
@@ -325,7 +292,10 @@
 "type": "object",
 "properties": {
 "data": {
-"type": "array"
+"type": "array",
+"items": {
+"$ref": "#/definitions/Thing"
+}
 }
 }
 }

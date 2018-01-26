@@ -20,14 +20,10 @@ type Thing struct {
 
 // @def Things
 type Thines struct {
-	Data []Thing         `json:"data" `
+	Data []Thing         `json:"data" swag:"Thing"`
 }
 
-// @def Pets
-type Pets struct {
-	Id  bson.ObjectId `json:"id"`
-	Tag []Tag         `json:"tag" `
-}
+
 
 // @def Tag
 type Tag struct {
@@ -52,5 +48,5 @@ type Article struct {
 
 // @def Articles
 type Articles struct {
-	Data []Article   `json:"data" `
+	Data []Article   `json:"data" swag:"Article"`
 }

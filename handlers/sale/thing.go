@@ -20,21 +20,21 @@ type ThingContoller struct {
 // @Produce  json
 // @tag users
 // @Param   page query string false  "page"
-// @Success 200 {object} @Things  "petslist"
-// @Router /things [get]
+// @Success 200 {object} @Things  "Things"
+// @Router /thing [get]
 func (ctrl ThingContoller) List(c *gin.Context) {
 	db := c.MustGet("db").(*mgo.Database)
-	things := []models.Thing{}
+	thing := []models.Thing{}
 
-	err := db.C(models.CollectionStuff).Find(nil).All(&things)
+	err := db.C(models.CollectionStuff).Find(nil).All(&thing)
 	if err != nil {
 		c.JSON(http.StatusOK, gin.H{"msg":fmt.Sprintf("%s", err)})
 		return
 	}
 
 	// gin.H is a shortcut for map[string]interface{}
-	// c.JSON(http.StatusOK, gin.H{"stuff/list": things})
-	c.JSON(http.StatusOK, things)
+	// c.JSON(http.StatusOK, gin.H{"stuff/list": thing})
+	c.JSON(http.StatusOK, thing)
 }
 
 
@@ -43,9 +43,9 @@ func (ctrl ThingContoller) List(c *gin.Context) {
 // @Accept  json
 // @Produce  json
 // @tag users
-// @Param   pets body @Thing true "pets fields"
+// @Param   thing body @Thing true "thing"
 // @Success 200 {object} @Thing  "success"
-// @Router /things [post]
+// @Router /thing [post]
 func (ctrl ThingContoller) Create(c *gin.Context) {
 	db := c.MustGet("db").(*mgo.Database)
 
@@ -71,7 +71,7 @@ func (ctrl ThingContoller) Create(c *gin.Context) {
 // @Produce  json
 // @tag users
 // @Param   _id query string false  "_id of doc"
-// @Success 200 {object} @Pets  "doc"
+// @Success 200 {object} @Thing  "doc"
 // @Router /thing [get]
 func (ctrl ThingContoller) GetOne(c *gin.Context) {
 	db := c.MustGet("db").(*mgo.Database)
@@ -92,8 +92,8 @@ func (ctrl ThingContoller) GetOne(c *gin.Context) {
 // @Produce  json
 // @tag users
 // @Param   _id query string false  "_id of doc"
-// @Success 200 {object} @Pets  "doc"
-// @Router /things [delete]
+// @Success 200 {object} @Thing  "doc"
+// @Router /thing [delete]
 func (ctrl ThingContoller) Delete(c *gin.Context) {
 	db := c.MustGet("db").(*mgo.Database)
 
@@ -113,9 +113,10 @@ func (ctrl ThingContoller) Delete(c *gin.Context) {
 // @Accept  json
 // @Produce  json
 // @tag users
-// @Param   pets body @Thing true "pets fields"
+// @Param   thing body @Thing true "thing fields"
+// @Param   _id query string true "mongo id"
 // @Success 200 {object} @Thing  "success"
-// @Router /things [put]
+// @Router /thing [put]
 func (ctrl ThingContoller) Put(c *gin.Context) {
 	db := c.MustGet("db").(*mgo.Database)
 
@@ -142,9 +143,9 @@ func (ctrl ThingContoller) Put(c *gin.Context) {
 
 
 func (ctrl ThingContoller) SetRoute(router *gin.Engine) {
-	router.GET("/things/:_id", ctrl.GetOne)
-	router.GET("/things", ctrl.List)
-	router.POST("/things", ctrl.Create)
-	router.DELETE("/things/:_id", ctrl.Delete)
-	router.PUT("/things/:_id", ctrl.Put)
+	router.GET("/thing/:_id", ctrl.GetOne)
+	router.GET("/thing", ctrl.List)
+	router.POST("/thing", ctrl.Create)
+	router.DELETE("/thing/:_id", ctrl.Delete)
+	router.PUT("/thing/:_id", ctrl.Put)
 }

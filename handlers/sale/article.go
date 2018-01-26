@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"gopkg.in/mgo.v2"
 	"net/http"
+	"strconv"
 )
 
 type ArticleController struct {
@@ -16,7 +17,7 @@ type ArticleController struct {
 // @Accept  json
 // @Produce  json
 // @tag article
-// @Param   pets body @Article true "pets fields"
+// @Param   article body @Article true "article"
 // @Success 200 {object} @Article  "success"
 // @Router /article [post]
 func (ctrl ArticleController) Post(c *gin.Context) {
@@ -41,15 +42,19 @@ func (ctrl ArticleController) Post(c *gin.Context) {
 // @Accept  json
 // @Produce  json
 // @tag article
-// @Param   page query string false  "page"
-// @Param   limit query string false  "limit"
+// @Param   page query int false  "page"
+// @Param   limit query int false  "limit"
 // @Success 200 {object} @Articles  "文章列表"
 // @Router /article [get]
 func (ctrl ArticleController) Get(c *gin.Context) {
 	db := c.MustGet("db").(*mgo.Database)
-	articles := []models.Article{}
+	var articles []models.Article
 
-	err := db.C(models.CollectionArticle).Find(nil).All(&articles)
+	limit, err := strconv.Atoi(c.DefaultQuery("limit", "20"))
+	page, err := strconv.Atoi(c.DefaultQuery("page", "1"))
+
+	err = db.C(models.CollectionArticle).Find(nil).
+		Skip(limit * (page - 1)).Limit(limit).All(&articles)
 	if err != nil {
 		c.JSON(http.StatusOK, gin.H{"msg": fmt.Sprintf("%s", err)})
 		return
