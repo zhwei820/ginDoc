@@ -1,0 +1,15 @@
+<seelog type="asynctimer" asyncinterval="1000" minlevel="trace" maxlevel="error">
+    <outputs formatid="main">
+        <filter levels="info,warn,error,critical" formatid="main">
+            <console/>
+            <rollingfile formatid="main" type="size" filename="./log/log_info.log" maxsize="209715200" maxrolls="50" />
+        </filter>
+        <filter levels="trace,debug,info,warn,error" formatid="main">
+            <console/>
+            <rollingfile formatid="main" type="size" filename="./log/log_debug.log" maxsize="104857600" maxrolls="50" />
+        </filter>
+    </outputs>
+    <formats>
+        <format id="main" format="[%Date/%Time] [%LEV] [%File %Func:%Line] %Msg%n"/>
+    </formats>
+</seelog>

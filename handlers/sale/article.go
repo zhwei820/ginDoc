@@ -7,6 +7,9 @@ import (
 	"gopkg.in/mgo.v2"
 	"net/http"
 	"strconv"
+	"ginDoc/db"
+	clog "github.com/cihub/seelog"
+	"github.com/garyburd/redigo/redis"
 )
 
 type ArticleController struct {
@@ -60,11 +63,37 @@ func (ctrl ArticleController) Get(c *gin.Context) {
 		return
 	}
 
-	c.JSON(200, gin.H{"data": articles})
+	c.JSON(http.StatusOK, gin.H{"data": articles})
+}
+
+// @Summary 压测
+// @Description 压测
+// @Produce  json
+// @tag article
+// @Success 200 {object} @Articles  "压测下"
+// @Router /siege [get]
+func (ctrl ArticleController) Siege(c *gin.Context) {
+	rc := db.CachePool.Get()
+	defer rc.Close()
+	key1 := "s"
+	rc.Do("SET", key1, 0)
+	n, err := redis.String(rc.Do("GET", key1))
+	if err == nil {
+		clog.Errorf("redis %s: %s", key1, err.Error())
+	}
+	key2 := "hset"
+	rc.Do("HSET", key2, "a", "ddd")
+	a, err := redis.String(rc.Do("HGET", key2, "a"))
+	if err == nil {
+		clog.Errorf("redis %s:%s: %s", key2, "a", err.Error())
+	}
+
+	c.JSON(http.StatusOK, gin.H{"data": gin.H{"n": n, "a": a}})
 }
 
 func (ctrl ArticleController) SetRoute(router *gin.Engine) {
 	router.GET("/article", ctrl.Get)
 	router.POST("/article", ctrl.Post)
+	router.GET("/siege", ctrl.Siege)
 
 }

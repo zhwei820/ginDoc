@@ -1,13 +1,14 @@
 package main
 
 import (
-	"ginDoc/db"
+	_ "ginDoc/db"
+	_ "ginDoc/utils"
+
 	"ginDoc/conf"
 )
 
 
 func init() {
-	db.Connect()
 
 }
 
@@ -19,3 +20,7 @@ func init() {
 func main() {
 	NewServer().Run(":" + conf.Config()["httpport"])
 }
+
+
+
+// doc gen: swagger.exe

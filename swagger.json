@@ -25,13 +25,13 @@
 "summary": "文章列表",
 "parameters": [
 {
-"type": "string",
+"type": "int",
 "description": "page",
 "name": "page",
 "in": "query"
 },
 {
-"type": "string",
+"type": "int",
 "description": "limit",
 "name": "limit",
 "in": "query"
@@ -77,6 +77,27 @@
 "schema": {
 "type": "object",
 "$ref": "#/definitions/Article"
+}
+}
+}
+}
+},
+"/siege": {
+"get": {
+"description": "压测",
+"produces": [
+"application/json"
+],
+"tags": [
+"article"
+],
+"summary": "压测",
+"responses": {
+"200": {
+"description": "压测下",
+"schema": {
+"type": "object",
+"$ref": "#/definitions/Articles"
 }
 }
 }
