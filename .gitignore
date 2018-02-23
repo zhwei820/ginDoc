@@ -1,2 +1,4 @@
 /conf/app.conf
 /.idea
+/*.exe
+/log
