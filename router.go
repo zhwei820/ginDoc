@@ -8,10 +8,11 @@ import (
 	"ginDoc/conf"
 )
 
-
 func NewServer() *gin.Engine {
 
-
+	if conf.Cfg["debug"] != "true" {
+		gin.SetMode(gin.ReleaseMode)
+	}
 	router := gin.Default()
 	router.Use(middlewares.Connect)
 	sale.ThingContoller{}.SetRoute(router)

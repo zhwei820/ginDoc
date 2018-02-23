@@ -20,7 +20,7 @@ func initRedisPool(redisUrlKey string) *redis.Pool {
 	redisUrl := conf.Cfg[redisUrlKey]
 	RC := &redis.Pool{
 		MaxIdle:     1,
-		MaxActive:   10,
+		MaxActive:   1000,
 		IdleTimeout: 180 * time.Second,
 		Dial: func() (redis.Conn, error) {
 			c, err := redis.DialURL(redisUrl)
