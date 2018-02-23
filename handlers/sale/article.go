@@ -91,9 +91,28 @@ func (ctrl ArticleController) Siege(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"data": gin.H{"n": n, "a": a}})
 }
 
+// @Summary 压测redis get
+// @Description 压测
+// @Produce  json
+// @tag article
+// @Success 200 {object} @Articles  "压测下"
+// @Router /siege [get]
+func (ctrl ArticleController) Bench(c *gin.Context) {
+	rc := db.CachePool.Get()
+	defer rc.Close()
+	key1 := "s"
+	n, err := redis.String(rc.Do("GET", key1))
+	if err != nil {
+		clog.Errorf("redis %s: %s", key1, err.Error())
+	}
+
+	c.JSON(http.StatusOK, gin.H{"data": gin.H{"n": n,}})
+}
+
 func (ctrl ArticleController) SetRoute(router *gin.Engine) {
 	router.GET("/article", ctrl.Get)
 	router.POST("/article", ctrl.Post)
 	router.GET("/siege", ctrl.Siege)
+	router.GET("/bench", ctrl.Bench)
 
 }
