@@ -78,13 +78,13 @@ func (ctrl ArticleController) Siege(c *gin.Context) {
 	key1 := "s"
 	rc.Do("SET", key1, 0)
 	n, err := redis.String(rc.Do("GET", key1))
-	if err == nil {
+	if err != nil {
 		clog.Errorf("redis %s: %s", key1, err.Error())
 	}
 	key2 := "hset"
 	rc.Do("HSET", key2, "a", "ddd")
 	a, err := redis.String(rc.Do("HGET", key2, "a"))
-	if err == nil {
+	if err != nil {
 		clog.Errorf("redis %s:%s: %s", key2, "a", err.Error())
 	}
 

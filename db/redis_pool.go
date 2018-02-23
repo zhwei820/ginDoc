@@ -5,7 +5,6 @@ import (
 	"time"
 	"fmt"
 	"ginDoc/conf"
-
 )
 
 var (
@@ -14,7 +13,7 @@ var (
 )
 
 func init() {
-	CachePool = initRedisPool("CACHE_REDIS")
+	CachePool = initRedisPool("cache_redis")
 }
 
 func initRedisPool(redisUrlKey string) *redis.Pool {
@@ -30,17 +29,24 @@ func initRedisPool(redisUrlKey string) *redis.Pool {
 			}
 			return c, nil
 		},
+		TestOnBorrow: func(c redis.Conn, t time.Time) error {
+			if time.Since(t) < time.Minute {
+				return nil
+			}
+			_, err := c.Do("PING")
+			return err
+		},
 	}
 	return RC
 
 }
 
-func usage()  {
+func usage() {
 
 	rc := CachePool.Get()
 	rc.Do("SET", "s", 0)
 	n, err := rc.Do("GET", "s")
-	if err !=nil{
+	if err != nil {
 		fmt.Println(n)
 	}
 
