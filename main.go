@@ -1,12 +1,11 @@
 package main
 
 import (
+	"ginDoc/conf"
+
 	_ "ginDoc/db"
 	_ "ginDoc/utils"
-
-	"ginDoc/conf"
 )
-
 
 func init() {
 
@@ -18,9 +17,7 @@ func init() {
 // @contact.email wei.zhou@shunwang.com
 
 func main() {
-	NewServer().Run(":" + conf.Config()["httpport"])
+	NewServer().Run(":" + conf.Cfg["httpport"])
 }
-
-
 
 // doc gen: swagger.exe

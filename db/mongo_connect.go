@@ -15,7 +15,7 @@ var (
 
 
 func init() {
-	var uri = conf.Config()["mongourl"]
+	var uri = conf.Cfg["mongourl"]
 	mongo, err := mgo.ParseURL(uri)
 	s, err := mgo.Dial(uri)
 	if err != nil {

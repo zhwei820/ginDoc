@@ -17,7 +17,7 @@ func init() {
 }
 
 func initRedisPool(redisUrlKey string) *redis.Pool {
-	redisUrl := conf.Config()[redisUrlKey]
+	redisUrl := conf.Cfg[redisUrlKey]
 	RC := &redis.Pool{
 		MaxIdle:     1,
 		MaxActive:   10,
