@@ -72,7 +72,7 @@ func (ctrl ArticleController) Get(c *gin.Context) {
 // @tag article
 // @Success 200 {object} @Articles  "压测下"
 // @Router /siege [get]
-func (ctrl ArticleController) Siege(c *gin.Context) {
+func (ctrl ArticleController) boom2(c *gin.Context) {
 	rc := db.CachePool.Get()
 	defer rc.Close()
 	key1 := "s"
@@ -97,7 +97,7 @@ func (ctrl ArticleController) Siege(c *gin.Context) {
 // @tag article
 // @Success 200 {object} @Articles  "压测下"
 // @Router /siege [get]
-func (ctrl ArticleController) Bench(c *gin.Context) {
+func (ctrl ArticleController) boom1(c *gin.Context) {
 	rc := db.CachePool.Get()
 	defer rc.Close()
 	key1 := "s"
@@ -109,10 +109,22 @@ func (ctrl ArticleController) Bench(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"data": gin.H{"n": n,}})
 }
 
+// @Summary 压测 hello
+// @Description 压测
+// @Produce  json
+// @tag article
+// @Success 200 {object} @Articles  "压测下"
+// @Router /siege [get]
+func (ctrl ArticleController) hello(c *gin.Context) {
+
+	c.JSON(http.StatusOK, gin.H{"data": gin.H{"n": 11,}})
+}
+
 func (ctrl ArticleController) SetRoute(router *gin.Engine) {
 	router.GET("/article", ctrl.Get)
 	router.POST("/article", ctrl.Post)
-	router.GET("/siege", ctrl.Siege)
-	router.GET("/bench", ctrl.Bench)
+	router.GET("/boom2", ctrl.boom2)
+	router.GET("/boom1", ctrl.boom1)
+	router.GET("/hello", ctrl.hello)
 
 }
