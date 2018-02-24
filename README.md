@@ -1,18 +1,10 @@
-Reference: https://github.com/madhums/go-gin-mgo-demo
+# gin Doc
 
-# go-gin-mgo
-A starter web project written in go using:
-- Gin
-- Mgo
-
-```
-go install && go-gin-mgo
+# load test: https://github.com/rakyll/boom
 ```
 
-##Refactoring list
- 1. Move mongodb initialization to middleware*
- 2. Move Thing to models*
- 3. Move route method to handlers*
+boom -n 100000 -c 100 http://10.34.60.128:9002/boom2
 
+```
 
 to generate doc , see https://github.com/rookiejin/swagger
